@@ -19,20 +19,15 @@ utilizando os dados também disponibilizados em @mrborges. Serão apresentados o
 resultados item a item na mesma sequência do documento com as questões. Para a
 construção deste documento foi assumido que o leitor estará com uma cópia do
 documento que contém as questões (uma cópia do mesmo pode ser encontrada neste
-repositório na pasta
-`docs`.
+repositório na pasta `docs`, e tem acesso às implementações disponíveis na pasta
+`notebooks` nos formato ipynb e pdf.
 
 = Questões
 
-Para referência, temos as seguintes variáveis: $Q ~ NN(0, 2)$, $X ~ UU(-1, 1)$,
-$Y ~ EE(lambda = 0.05)$, $T ~ BB(15, 0.4)$. As questões que necessitam de apresentação
-de resultados para cada variável serão colocadas em sub-sessões separadas.
-
+Temos as seguintes variáveis: $Q ~ NN(0, 2)$, $X ~ UU(-1, 1)$, $Y ~ EE(lambda = 0.05)$,
+$T ~ BB(15, 0.4)$. Vamos começar calculando as expectâncias e variâncias teóricas para cada uma.
 
 == (a) Expectância e Variâncias Teóricas
-
-Para cada variável temos as expectâncias e variâncias teóricas especificadas abaixo, 
-començando por $Q$.
 
 === $Q$
 
@@ -90,7 +85,8 @@ $
 Para este item os resultados foram calculados carregando os dados via a
 biblioteca numpy no Python e usando as funções embutidas para obter a média e
 variância amostral. Os resultados com 5 casas decimais foram colocados na
-@tab-sample-x-theory.
+@tab-sample-x-theory, ao lado dos resultados teóricos para cada variável 
+bem como a diferença entre os dois.
 
 #figure(
  table(
@@ -118,7 +114,7 @@ comparando via a diferença relativa percentual temos apenas $0.092%$.
 
 Montando os histogramas das variáveis aleatórias (com 50 bins nas distribuições
 contínuas), que podem ser vistos na @fig-histograms-rvs-1 e
-@fig-histograms-rvs-2, podemos ver uma excelente concordância com as
+@fig-histograms-rvs-2, podemos visualizar uma excelente aderência com as
 distribuições analíticas de origem.
 
 #subpar.grid(
@@ -167,7 +163,7 @@ for var, rv in data.items():
             .mean(axis=1)
         )
 
-# Continuação com plotagem #
+        # código de plotagem #
 ```
 E para a variância amostral:
 
@@ -180,20 +176,21 @@ for var, rv in data.items():
             .var(axis=1, ddof=1)
         )
 
-# Continuação com plotagem #
+        # código de plotagem #
 ```
 
 Onde a variável `data` é um dicionário (tabela hash) contendo os dados
 relativos à cada variável relacionados ao nome da variável. O código roda o
 núcleo que sorteia 10 mil amostras (`np.choice`) e tira a estatística (`.{mean, var}(axis=1)`)
 para cada variável no dicionário `data` e para cada tamanho de amostra na lista
-`sizes` com reposição. Depois segue com o código de plotagem, que pode ser
-achado por completo no caderno jupyter que acompanha o relatório.
+`sizes` com reposição. Depois segue com o código de plotagem, que foi omitido
+aqui mas pode ser achado por completo no caderno jupyter que acompanha o
+relatório.
 
 == (e) + (f) Visualizando as distribuições construídas + Comparações
 
 As variáveis foram construídas 3 a 3 para cada variável aleatória de origem. Vamos
-começar listando as médias amostrais.
+começar discutindo as médias amostrais.
 
 === Médias Amostrais
 
@@ -222,18 +219,18 @@ aumento do tamanho da amostra é possível ver a convergência para uma normal.
   caption: [Média amostral de $Y$]
 )
 
-Na variável $T$ podemos ver artefatos na variável média amostral, isso acontece
-por conta da variável de origem ser uma binomial, ou seja, uma variável
-discreta. No entanto, da mesma forma podemos ver a variável aderindo a uma
-normal com o aumento do tamanho da amostra.
+Na variável $T$ podemos ver artefatos na distribuição da média amostral, isso
+acontece por conta da variável de origem ser uma binomial, ou seja, uma
+variável discreta. No entanto, da mesma forma podemos ver a variável aderindo a
+uma normal com o aumento do tamanho da amostra.
 
 #figure(
   image("figures/sample_mean_T.svg"),
   caption: [Média amostral de $T$]
 )
 
-Assim podemos ver a aderência de todas as variáveis a uma normal $N(mu,
-sigma/n)$ em todos os casos. Vejamos agora as variâncias.
+Podemos ver a aderência de todas as variáveis a uma normal $N(mu, sigma/n)$
+em todos os casos. Vejamos agora as variâncias.
 
 === Variâncias Amostrais
 
@@ -243,7 +240,7 @@ multiplicado pelo fator $(n-1)/sigma$ dado que $Q$ é uma normal. Como podemos
 ver na @fig-var-q.
 
 #figure(
-  image("figures/sample_variance_Q.svg"),
+  image("figures/sample_variance_Q.svg", width: 90%),
   caption: [Variância amostral da variável $Q$. Com $chi^2$ sobreposta.]
 ) <fig-var-q>
 

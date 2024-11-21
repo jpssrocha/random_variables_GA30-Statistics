@@ -11,13 +11,13 @@ The data and supporting material can be found at:
 
 # Folders
 
-.
-├── docs
-├── notebooks
-├── pyproject.toml
-├── README.md
-├── report
-└── uv.lock
+.\
+├── docs \
+├── notebooks\
+├── pyproject.toml\
+├── README.md\
+├── report\
+└── uv.lock\
 
 3 directories, 3 files
 
